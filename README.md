@@ -1,5 +1,7 @@
 # MERN BLOG
 
+
+
 vite(https://ko.vitejs.dev/guide/)
 tailwindcss(https://tailwindcss.com/docs/guides/vite)
 
@@ -25,4 +27,11 @@ git commit -m "first"
 git remote add origin {you_url}
 git branch -M main
 git push -u origin main
+```
+
+```bash
+npm init -y
+npm i express
+npm i nodemon
+npm i mongoose
 ```
