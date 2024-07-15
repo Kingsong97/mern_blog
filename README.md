@@ -4,6 +4,7 @@
 
 vite(https://ko.vitejs.dev/guide/)
 tailwindcss(https://tailwindcss.com/docs/guides/vite)
+insomnia(https://insomnia.rest/)
 
 ```bash
 npm create vite@latest
@@ -34,4 +35,5 @@ npm init -y
 npm i express
 npm i nodemon
 npm i mongoose
+npm i dotenv
 ```
