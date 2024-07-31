@@ -5,6 +5,7 @@
 vite(https://ko.vitejs.dev/guide/)
 tailwindcss(https://tailwindcss.com/docs/guides/vite)
 insomnia(https://insomnia.rest/)
+redux-toolkit(https://redux-toolkit.js.org/)
 
 ```bash
 npm create vite@latest
@@ -14,6 +15,12 @@ npm create vite@latest
   npm run dev
   npm i react-router-dom
   npm i react-icons
+
+  npm install @reduxjs/toolkit
+  npm install react-redux
+  npm install redux-persist
+
+  npm install firebase
 ```
 
 ```bash
@@ -36,4 +43,13 @@ npm i express
 npm i nodemon
 npm i mongoose
 npm i dotenv
+npm i bcryptjs
+npm i jsonwebtoken
+npm i cookie-parser
 ```
+
+
+
+## 작업 순서
+
+1. client 레이아웃 작업
