@@ -1,8 +1,13 @@
 import express from "express";
-import { test } from "../controllers/user.controller.js";
+import { test, updateUser, deleteUser, signout } from "../controllers/user.controller.js"; // deleteUser 추가
+import { verifyToken } from "../utils/verifyUser.js";
 
 const router = express.Router();
 
 router.get("/test", test);
+router.put("/update/:userId", verifyToken, updateUser); // 슬래시 추가
+router.delete("/delete/:userId", verifyToken, deleteUser); // 슬래시 추가
+router.post("/signout", signout);
+// router.get("/getuser", verifyToken, getUsers);
 
 export default router;

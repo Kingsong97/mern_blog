@@ -1,61 +1,67 @@
 import { Link } from "react-router-dom";
-import { IoLogInOutline } from "react-icons/io5";
-// import { MdDarkMode } from "react-icons/md";
-import { FaSun, FaMoon } from "react-icons/fa";
 import { IoMdMenu } from "react-icons/io";
-// import { useState } from "react";
-import { useSelector } from "react-redux";
+import { FaSearch } from "react-icons/fa";
+import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
-
-const Header = () => {
-    // const dispatch = useDispatch();
+export default function Header() {
+    const dispatch = useDispatch();
     const { currentUser } = useSelector((state) => state.user);
     const { theme } = useSelector((state) => state.theme);
-    // const [darkMode, setDarkMode] = useState(false);
-
-    // const toggleDarkMode = () => {
-    //     setDarkMode(!darkMode);
-    //     if (darkMode) {
-    //         document.documentElement.classList.remove('dark');
-    //     } else {
-    //         document.documentElement.classList.add('dark');
-    //     }
-    // };
-
-
     return (
-        <header className="flex justify-between items-center w-full h-16 bg-white uppercase px-40 dark:bg-gray-800">
-            <h1 className="logo font-caveat text-2xl">kingsong</h1>
-            <nav className="top_nav font-roboto font-light hidden md:flex">
-                <ul className="flex gap-4">
-                    <li><Link to="#" className="text-black dark:text-white">home</Link></li>
-                    <li><Link to="#" className="text-black dark:text-white">about</Link></li>
-                    <li><Link to="#" className="text-black dark:text-white">blog</Link></li>
-                    <li><Link to="#" className="text-black dark:text-white">portfolio</Link></li>
-                    <li><Link to="#" className="text-black dark:text-white">contact</Link></li>
-                </ul>
-            </nav>
-            <div className="setting flex gap-4">
-                <div className="login text-xl"><Link to="/sign-in"><IoLogInOutline /></Link></div>
-                <div className="dark_mode text-xl cursor-pointer" onClick={() => dispatchEvent(toggleTheme())}>
-                    {theme === "light" ? <FaSun /> : <FaMoon />}</div>
-                <div className="menu_box text-xl md:hidden"><IoMdMenu /></div>
+        <header id='header' className="bg-black text-white">
+            <div className="flex  justify-between items-center p-4">
+                <nav>
+                    <div className="cursor-pointer"><IoMdMenu className="size-5" /></div>
+                    <ul className="bg-white text-black p-4 absolute top-0 left-0 hidden">
+                        <li className="border-b border-black pr-20 py-2 text-xl">Menu</li>
+                        <li className="pr-20 py-2 text-xl text-gray-400"><Link rel="stylesheet" href="/">Home</Link></li>
+                        <li className="pr-20 py-2 text-xl text-gray-400"><Link rel="stylesheet" href="/sign-in">SignIn</Link></li>
+                        <li className="pr-20 py-2 text-xl text-gray-400"><Link rel="stylesheet" href="/sign-up">SignUp</Link></li>
+                    </ul>
+                </nav>
+                <h1 className="text-2xl font-['notosanskr']">
+                    <Link href='/'><span className="font-bold">Kingsong</span> Blog</Link>
+                </h1>
+                <div className="flex">
+                    <button onClick={() => dispatch(toggleTheme())} >
+                        {theme === "light" ? <MdOutlineLightMode className="size-6" /> : <MdOutlineDarkMode className="size-6" />}
+                    </button>
+                    <button className="px-2  ml-1">
+                        <FaSearch className="size-5" />
+                    </button>
+                    {/* <button className="px-2">
+                        signin
+                    </button>
+                    <button className="px-2">
+                        signup
+                    </button> */}
+                    {currentUser ? (
+                        <>
+                            <img
+                                className="rounded-full w-7 h-7 ml-1"
+                                src={currentUser.profilePicture} />
+                            <div className="absolute flex flex-col items-center p-3 border border-gray-300 rounded-lg shadow-xl bg-white top-20 right-5 w-64 text-gray-800 space-y-4">
+                                <div className="flex flex-col items-start space-y-1">
+                                    <span className="font-medium text-lg">{currentUser.username}</span>
+                                    <span className="text-sm text-gray-500">{currentUser.email}</span>
+                                </div>
+                                <Link
+                                    to={'/dashboard?tab=profile'}
+                                    className="w-full px-4 py-2 text-center text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition duration-200"
+                                >
+                                    Profile
+                                </Link>
+                                <button className="w-full px-4 py-2 text-center text-sm font-medium text-white bg-gray-500 rounded-md hover:bg-gray-600 transition duration-200">
+                                    Sign Out
+                                </button>
+                            </div>
+                        </>
+                    ) : (
+                        <Link to={"/sign-in"}>로그인</Link>
+                    )}
+                </div>
             </div>
-            {currentUser ? (
-                <>
-                    <img className="rounded-full w-11 h-11" src={currentUser.profilePicture} />
-
-                    <div className="absolute flex flex-col p-4 border top-20 right-5 w-60">
-                        <span>{currentUser.username}</span>
-                        <span>{currentUser.email}</span>
-                        <Link to={'/dashboard?tab=profile'}></Link>
-                        <span>signOut</span>
-                    </div>
-                </>) : (
-                <Link to={"/sign=in"}>로그인</Link>
-            )}
-        </header>
-    );
+        </header >
+    )
 }
-
-export default Header;
